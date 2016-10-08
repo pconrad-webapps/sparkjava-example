@@ -1,0 +1,37 @@
+<!DOCTYPE html>  <!-- -*- mode: html -*- -->
+<html>
+{{>head}}
+<title></title>
+<body>
+{{>nav}}
+
+<h1>Sandwich</h1>
+
+<p>Our sandwich has this kind of bread: {{bread}}.</p>
+
+{{#cheese}}
+<p>This sandwich has {{cheese}} cheese too!</p>
+{{/cheese}}
+
+{{^cheese}}
+<p>Sadly, this sandwich has no cheese.  Perhaps the diner is lactose intolerant, or a vegan.</p>
+{{/cheese}}
+
+
+<p>Here are the condiments.  See the drop down menu for all the condiments.</p>
+
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    {{#condiments}}
+    <li><a href="#">{{.}}</a></li>
+    {{/condiments}}
+  </ul>
+</div>
+
+
+
+{{>footer}}
+</body>
+</html>

@@ -32,18 +32,23 @@ import static spark.Spark.get;
  */
 public class MustacheTemplateExample {
     public static void main(String[] args) {
+
 	Spark.staticFileLocation("/static");
 	try {
 	    Spark.port(Integer.valueOf(System.getenv("PORT"))); // needed for Heroku
 	} catch (Exception e) {
 	    System.err.println("NOTICE: using default port.  Define PORT env variable to override");
 	}
-	final Map nullMap = new HashMap();
 
-        get("/", (rq, rs) -> new ModelAndView(nullMap, "home.mustache"), new MustacheTemplateEngine());
+        get("/", (rq, rs) ->
+	    new ModelAndView(
+			     new ExampleModel(rq,rs).addBread(),  "home.mustache"),
+	    new MustacheTemplateEngine());
 	
-        get("/ctof", (rq, rs) -> new ModelAndView(nullMap, "ctof.mustache"), new MustacheTemplateEngine());
-
+        get("/ctof", (rq, rs) -> new ModelAndView(
+						  new ExampleModel(rq,rs).addCondiments(),
+						  "ctof.mustache"), new MustacheTemplateEngine());
+	
 	get("/ctof_result",
 	    (rq, rs) ->
 	    {
@@ -67,5 +72,18 @@ public class MustacheTemplateExample {
 	    );
 	
 
+	get("/sandwich",
+	    (rq, rs) ->
+	    {
+		ExampleModel model = new ExampleModel(rq,rs);
+		model.addBread().addCondiments().addCheese();
+		return new ModelAndView(model, "sandwich.mustache");
+	    },
+	    new MustacheTemplateEngine()
+	    );
+
+
+	
     }
+    
 }
