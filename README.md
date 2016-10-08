@@ -9,4 +9,5 @@ To build, use `mvn package`
 
 To run, use `java -jar target/spark-template-mustache-2.4-SNAPSHOT.jar`
 
-Demo on Heroku at: https://sparkjava-bootstrap-demo.herokuapp.com/
+Demo on Heroku at: https://sparkjava-example.herokuapp.com/
+
